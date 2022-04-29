@@ -1,5 +1,16 @@
-var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/integrated_app");
+// var mongoose = require("./dbconnect");
+
+
+// // const { MongoClient, ServerApiVersion } = require('mongodb');
+// // const uri = "mongodb+srv://nourhan-berjawi140:u3Bek0XIaKtEHcji@cluster0.ixjdr.mongodb.net/integrated_app?retryWrites=true&w=majority";
+// // const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+// // client.connect();
+
+var con = require("./dbconnect");
+
+var mongoose = con.mongoose;
+
+
 var answerSchema = new mongoose.Schema({
     _id: String,
     ans1 : String,

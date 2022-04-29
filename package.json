@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node app.js"
+    "start": "node app.js"
   },
   "author": "Nourhan Berjawi",
   "license": "ISC",
@@ -17,6 +17,7 @@
     "express-session": "^1.17.2",
     "jquery": "^3.6.0",
     "jsdom": "^19.0.0",
+    "mongodb": "^4.5.0",
     "mongoose": "^6.3.0",
     "request": "^2.88.2"
   }

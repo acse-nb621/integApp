@@ -9,13 +9,22 @@ var express      = require("express"),
     answer       = require("./models/answer");
 const { json } = require("express/lib/response");
 
+
+
+// const { MongoClient, ServerApiVersion } = require('mongodb');
+// const uri = "mongodb+srv://nourhan-berjawi140:u3Bek0XIaKtEHcji@cluster0.ixjdr.mongodb.net/integrated_app?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+// client.connect();
+
  
 var app = express();
 var oneDay = 24*60*60*1000;
 
-mongoose.connect("mongodb://localhost/integrated_app");
+// mongoose.connect("mongodb://localhost/integrated_app");
 
 // var answers = mongoose.model('answers', answer);
+
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
