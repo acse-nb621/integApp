@@ -1,0 +1,12 @@
+<%- include('partials/header') %>
+<h1 style="text-align: center;"> يرجى تقييم درجة قوتك في الجوانب التالية من السلوك المهني قبل التدريب وبعده ، على مقياس من 1-5 (1 = ضعيف جدًا ، 5 = قوي جدًا)</h1>
+<%- include('partials/footer.ejs') %>
+
+
+<script>
+    $("#next").click(function(){
+        
+        window.location.href = "/question/"+String(40);
+        
+    });
+</script>

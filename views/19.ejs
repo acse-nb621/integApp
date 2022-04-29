@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script src="/assets/jQuery.min.js"></script>
+        <script src="/assets/helperFun.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;900&display=swap" rel="stylesheet">
+        <title>استبيان</title>
+    </head>
+
+    <body>
+        <nav class = "navbar bg-dark navbar-dark">
+            <div class="container">
+                <a class="navbar-brand">استبيان التقييم المبدئي – لومينوس</a>
+            </div>
+        </nav>
+
+        <div id="middle-section" class="row justify-content-center" >
+            <div id="main" class="container cardstyle1">
+                <div class="row justify-content-center" style="height: 50%; align-items: center;" >
+                    <div class="col-12 d-flex justify-content-center" style="height: 90%; align-items: center;">
+                        <img id="displayImg" src=""  style="height:80%;"  alt="unknown" >
+                    </div>    
+                </div>
+                <div  class="row justify-content-center" style="height: 15%; "> هل يعتبر عملك موسمي؟</div>
+                
+                <div class="row justify-content-center" style="height: 25%;" >
+                    <div class="col"> 
+                        <select id="worksel" style="width: 100%; height: 70%; font-size: medium;" size="3">
+                            <optgroup >
+                                <option id="seas">نعم ، إنه موسمي</option>
+                                <option id="var">لا ، إنه ليس موسميً ولكنه غير مستقر</option>
+                                <option id="dunno">لا أعرف</option>
+                                <option id="no">رفض الإجابة</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+
+   
+            
+
+        <script>
+
+            var rank    = "<%= info[0].quesRank %>";
+                type    = "<%= info[0].ansType %>",
+                title   = "<%= info[0].title %>";
+            
+            var info = "<%=info[1]%>";
+            var ans ="";
+            var imgstr ="";
+
+            var linfo = info.split(",");
+        
+            var localans = "";
+            var gender = "";
+
+            if(linfo.length > 4){
+                var ansJson = listToJSON(linfo);
+                var str="ans"+rank;
+                if(ansJson[str] != undefined){
+                    ans = ansJson[str];
+                }
+                if(ansJson["ans2"] != undefined){
+                    gender = ansJson["ans2"];
+                }
+            }
+
+            //load default image
+            if(gender == "ذكر"){
+                $("#displayImg").attr("src","/m.png");
+            }else{
+                $("#displayImg").attr("src","/f.png")
+            }
+            
+            if(ans != ""){
+                
+                if(ans == "نعم ، إنه موسمي" ){
+                    $('#seas').attr("selected","true");
+                    updateImage($("#worksel option:selected" ).attr("id"));
+                }else if(ans == "لا ، إنه ليس موسميً ولكنه غير مستقر"){
+                    $("#var").attr("selected","true");
+                    updateImage($("#worksel option:selected" ).attr("id"));
+                }else if(ans == "لا أعرف"){
+                    $("#dunno").attr("selected","true");
+                    updateImage($("#worksel option:selected" ).attr("id"));
+                }else{
+                    $("#no").attr("selected","true");
+                    updateImage($("#worksel option:selected" ).attr("id"));
+                }
+                
+            }
+
+            function updateImage(txt){           
+                var temp = "/"+(txt +".png");
+                $("#displayImg").attr("src",temp);
+            };
+
+            $("#worksel").change(function(e){
+                localans = $("#worksel option:selected" ).text();
+                updateImage($("#worksel option:selected" ).attr("id"));
+            });
+
+        </script>
+
+
+
+<%- include('partials/footer.ejs') %>
+
+<script>
+
+
+
+
+$("#prev").click(function(){
+    var prevq = Number(rank)-1;
+    var str = "/question/"+String(prevq);
+    window.location.href = str;
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+
+<script> 
+    // document.getElementById("prev").disabled = true;
+
+    $("#next").click(function(){
+        if(ans == "" && localans == ""){
+            alert("please answer")
+        }else{
+            if(localans != ""){
+                $.post("/submit", {answer : localans, quest : rank});
+            }
+            window.location.href = "/question/"+String(Number(rank)+1);
+        }
+
+    })
+
+    
+</script>

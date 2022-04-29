@@ -1,0 +1,22 @@
+{
+  "name": "integratedapp",
+  "version": "1.0.0",
+  "description": "INTEGRATED gamified survey app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nourhan Berjawi",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "jquery": "^3.6.0",
+    "jsdom": "^19.0.0",
+    "mongoose": "^6.3.0",
+    "request": "^2.88.2"
+  }
+}

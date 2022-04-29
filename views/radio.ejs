@@ -1,0 +1,84 @@
+<%- include('partials/header') %>
+
+<%- include('partials/footer.ejs') %>
+
+<script>
+    var localans = "";
+    var  options = "<%= info[0].options %>".split(",");
+    var main = document.getElementById("buttonSpace");
+    var imgPlace = document.getElementById("displayImg")
+
+    var input = document.createElement('input');
+        input.id = 'input';
+        input.type = 'text';
+        input.style.visibility = "hidden";
+
+    var check = false;
+    for(var i = 0; i < options.length; i++){
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.innerHTML = options[i];
+        button.className = 'button-53';
+        button.id = options[i];
+        button.name = title;
+
+        (function(index){
+            button.addEventListener("click", function() {
+                if(index != "أخرى"){
+                    input.remove();
+                }
+                localans = index;
+                input.value = index;
+                input.style.visibility = 'hidden';
+                check = false;
+          
+                if (rank == 2 || rank == 3){
+              
+                    var str = updateImg(rank,ans,ansJson,index,imgstr);
+                    imgPlace.src = "/gender-loc/"+str+".png";
+                
+                }
+
+            })
+        })(options[i])
+        main.appendChild(button);
+    }
+
+    if(rank == 4 || rank == 14){
+
+        var other = document.getElementById("أخرى");
+        other.value = 'other';
+        other.name = title;
+        
+        other.id = "other";
+        other.addEventListener('click',function(){
+            main.appendChild(input);
+            input.style.visibility = 'visible';
+            check = true;
+        });
+        
+    }
+
+
+    $("#next").click(function(){
+        
+        if(check == true){
+            var inp =  document.getElementById('input');
+            localans = inp.value;
+        }
+     
+
+        if(localans != "" || ans != ""){
+            if(localans != ""){
+                $.post("/submit", {answer : localans, quest : rank});
+            }
+            window.location.href = "/question/"+String(Number(rank)+1);
+        }else{
+            alert("please answer");
+        }
+        
+    });
+
+
+    
+</script>

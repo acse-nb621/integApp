@@ -1,0 +1,54 @@
+<%- include('partials/header') %>
+<input id="range" type="range" value="50">
+<h3 id = "rangeVal">-</h3>
+<%- include('partials/footer.ejs') %>
+
+
+
+<script>
+
+    var min = "<%= info[0].min %>",
+        max = "<%= info[0].max %>",
+        localans = "";
+
+    var range = document.getElementById("range");
+    var rangeVal = document.getElementById("rangeVal");
+    range.min = Number(min);
+    range.max = Number(max);
+    if(ans != ""){
+        range.value = Number(ans);
+        rangeVal.innerText = Number(ans);
+    }
+
+    $("#range").change(function(){
+   
+        if(rank == 12 && this.value == "13" ){
+            localans = "أكثر من 12" ;
+            rangeVal.innerText  = "أكثر من 12";
+        }else{
+            localans = this.value;
+            rangeVal.innerText =  this.value;
+        }
+        
+    })
+
+    $("#next").click(function(){
+        if(localans != "" || ans != ""){
+            var sendans = "";
+            if(localans != ""){
+                $.post("/submit", {answer : localans, quest : rank});
+                sendans = localans;
+            }
+            var str = "/question/"+String(Number(rank)+1);
+            if(rank == 12 && Number(sendans) > 3){
+                str = "/question/"+String(Number(rank)+2)
+            }
+            window.location.href = str;
+        }else{
+            alert("please answer");
+        }
+   
+    });
+
+    
+</script>

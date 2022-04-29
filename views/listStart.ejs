@@ -1,0 +1,12 @@
+<%- include('partials/header') %>
+<h1 style="text-align: center;">يرجى تقييم مدى موافقتك على العبارات التالية (1 = غير موافق بشدة ، 5 = موافق بشدة):</h1>
+<%- include('partials/footer.ejs') %>
+
+
+<script>
+    $("#next").click(function(){
+        
+        window.location.href = "/question/"+String(23);
+        
+    });
+</script>

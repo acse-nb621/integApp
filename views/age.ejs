@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script src="/assets/jQuery.min.js"></script>
+        <script src="/assets/helperFun.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;900&display=swap" rel="stylesheet">
+        <title>استبيان</title>
+    </head>
+
+    <body>
+        <nav class = "navbar bg-dark navbar-dark">
+            <div class="container">
+                <a class="navbar-brand">استبيان التقييم المبدئي – لومينوس</a>
+            </div>
+        </nav>
+
+        <div id="middle-section" class="row justify-content-center" >
+            <div id="main" class="container cardstyle1">
+                <div class="row justify-content-center" style="height: 10%; font-size: large;">العمر:</div>
+                <div class="row justify-content-center" style="height: 80%; align-items: center;">
+                    <div id="olddiv" class="col-lg-4 col-md-12 d-flex justify-content-center" style="align-items: center; height: 33%;">
+                        <img id="oldimg" src=""   alt="unknown" style="width: auto; height: 100%;" >
+                    </div>
+                    <div id="adudiv" class="col-lg-4 col-md-12 d-flex justify-content-center" style="align-items: center; height: 33%;" >
+                        <img id="aduimg" src=""   alt="unknown" style="width: auto; height: 100%;" >
+                    </div>
+                    <div id="yngdiv" class="col-lg-4 col-md-12 d-flex justify-content-center" style="align-items: center; height: 33%;"  >
+                        <img id="yngimg" src="" alt="unknown" style="width: auto; height: 100%;" >
+                    </div>
+                </div>
+            
+
+        <script>
+
+            var rank    = "<%= info[0].quesRank %>";
+                type    = "<%= info[0].ansType %>",
+                title   = "<%= info[0].title %>";
+            
+            var info = "<%=info[1]%>";
+            var ansString = [];
+            var ans ="";
+            var imgstr ="";
+            var ansPrev ="";
+            var linfo = info.split(",");
+        
+            var localans = "";
+
+
+            if(linfo.length > 1){
+               
+                var ansJson = listToJSON(linfo);
+                var str="ans"+rank;
+                if(ansJson[str] != undefined){
+                    ans = ansJson[str];
+                }
+                
+                if(ansJson["ans2"] != undefined){
+                    ansPrev = ansJson["ans2"];
+                }
+            }
+
+
+            var olddiv = document.getElementById("olddiv");
+            var adudiv = document.getElementById("adudiv");
+            var yngdiv = document.getElementById("yngdiv");
+            if(ansPrev == "ذكر"){
+                $("#oldimg").attr("src","/male-o.png");
+                $("#aduimg").attr("src","/male-a.png");
+                $("#yngimg").attr("src","/male-y.png");
+            }else if(ansPrev == "أنثى"){
+                $("#oldimg").attr("src","/female-o.png");
+                $("#aduimg").attr("src","/female-a.png");
+                $("#yngimg").attr("src","/female-y.png");
+            }
+
+
+            $("#olddiv").click(function(){
+                olddiv.classList.add("clickedAge");
+                yngdiv.classList.remove("clickedAge");
+                adudiv.classList.remove("clickedAge");
+                localans = "أكبر من 35 سنة";
+                });
+
+            $("#adudiv").click(function(){
+                adudiv.classList.add("clickedAge");
+                yngdiv.classList.remove("clickedAge");
+                olddiv.classList.remove("clickedAge");
+                localans = "18-35 سنة";
+                });
+
+            $("#yngdiv").click(function(){
+                yngdiv.classList.add("clickedAge");
+                olddiv.classList.remove("clickedAge");
+                adudiv.classList.remove("clickedAge");
+                localans = "اصغر من 18 سنة";
+                });
+
+
+            if(ans != ""){
+                if(ans == "أكبر من 35 سنة" ){
+                    $("#olddiv").click();
+                }else if(ans == "18-35 سنة"){
+                    $("#adudiv").click();
+                }else{
+                    $("#yngdiv").click();
+                }
+            }
+
+        </script>
+
+<%- include('partials/footer.ejs') %>
+
+
+
+<script>
+
+
+$("#prev").click(function(){
+    var prevq = Number(rank)-1;
+    var str = "/question/"+String(prevq);
+    window.location.href = str;
+});
+</script>
+<!-- Optional JavaScript; choose one of the two! -->
+<!-- <script src="prototype-q1.js"></script> -->
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+-->
+
+
+<script> 
+    // document.getElementById("prev").disabled = true;
+    var temp = document.getElementById("phone");
+
+    $("#next").click(function(){
+       
+        
+        if(localans== "" && ans == ""){
+            alert("please answer")
+        }else{
+            if(localans != ""){
+                $.post("/submit", {answer : localans, quest : rank});
+            }
+            window.location.href = "/question/"+String(Number(rank)+1);
+            
+        }
+
+    })
+
+    
+</script>

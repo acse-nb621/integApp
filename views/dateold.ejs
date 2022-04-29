@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+
+
+
+<!-- <label for="date"></label> -->
+
+<input type="date" id="date" name="trip-start"
+       value="2000-01-01"
+       min="2000-01-01" max="2023-12-31">
+
+<%- include('partials/footer.ejs') %>
+<script>
+    var done = false;
+
+    $("#date").change(function(){
+        done = true;
+    })
+    
+    $("#next").click(function(){
+
+        var temp = document.getElementById("date");
+        sendans = String(date.value);
+        if(!done && ans ==""){
+         
+            alert("please answer")
+        }else if(done){
+            $.post("/submit", {answer : sendans, quest : rank});
+            window.location.href = "/question/"+String(Number(rank)+1);
+        }else{
+            window.location.href = "/question/"+String(Number(rank)+1);    
+        }
+    })
+
+    
+</script>

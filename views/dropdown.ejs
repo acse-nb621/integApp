@@ -1,0 +1,68 @@
+<%- include('partials/header') %>
+<%- include('partials/footer.ejs') %>
+
+<script>
+
+    var localans = "";
+
+    var main = document.getElementById("buttonSpace");
+    var dropdown = document.createElement("select");
+    dropdown.id = 'dropdown'
+    
+    dropdown.onfocus = function() { this.size=3; };
+    dropdown.onblur = function() { this.size=1; };
+    dropdown.onchange = function() { this.size=1; this.blur(); };
+        
+    
+    
+    var options = "<%= info[0].options %>".split(","),
+        viewElem = "<%= info[0].viewElem %>";
+
+    main.appendChild(dropdown);
+
+    var option0 = document.createElement('option');
+        option0.value = viewElem;
+        option0.innerHTML = viewElem;
+        option0.disabled = true;
+        option0.selected = true;
+        option0.style = "display:none";
+
+    dropdown.appendChild(option0);
+
+
+    for(var i = 0; i < options.length; i++){
+        var option = document.createElement('option');
+        option.value = options[i];
+        option.innerHTML = options[i];
+        dropdown.appendChild(option);
+    }
+
+    if(ans != ""){
+        dropdown.value = ans;
+    }
+
+    dropdown.addEventListener('change',function handleChange(event){
+        localans = dropdown.options[dropdown.selectedIndex].text;
+    });
+
+    $("#next").click(function(){
+        if(localans != "" || ans != ""){
+            var subans = "";
+            if(localans != ""){
+                ans = localans;
+                $.post("/submit", {answer : localans, quest : rank});
+            }
+            var str = "/question/"+String(Number(rank)+1);
+            if(rank == 18 &&  ans != options[0]){
+                str = "/question/"+String(Number(rank)+2);
+            }
+            window.location.href = str;
+        }else{
+            alert("please answer :(")
+        }
+        
+    });
+</script>
+
+
+

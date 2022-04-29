@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script src="/assets/jQuery.min.js"></script>
+        <script src="/assets/helperFun.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;900&display=swap" rel="stylesheet">
+        <title>استبيان</title>
+    </head>
+
+    <body>
+        <nav class = "navbar bg-dark navbar-dark">
+            <div class="container">
+                <a class="navbar-brand">استبيان التقييم المبدئي – لومينوس</a>
+            </div>
+        </nav>
+
+        <div id="middle-section" class="row justify-content-center" >
+            <div id="main" class="container cardstyle1" style="max-height: 75%; max-width: 100%;">
+                <div class="row justify-content-center" style="height: 50%">
+                    <img id="displayImg" src="" style="height:90%; width:auto"  alt="unknown" >
+                </div>
+                <div class="row justify-content-center"  id="buttonSpace"></div>
+                <div class="row justify-content-center"  style="height: 15%">
+                    <button class="col next" id="next" type="submit">التالي</button>
+                    <button class="col prev" id="prev">السابق</button>
+                </div> 
+            </div>
+        </div>
+                
+        <div id="bottom-section" style="height: 10%" class="row justify-content-center">
+            <img id="btm-logo" src="/logo.png" >
+        </div>
+
+    <script>
+        var rank    = "<%= info[0].quesRank %>";
+            type    = "<%= info[0].ansType %>",
+            title   = "<%= info[0].title %>";
+
+        var dispTitle = document.getElementById("questionSpace");
+        dispTitle.innerText = title;
+        var info = "<%=info[1]%>";
+        var ansString = [];
+        var ans ="";
+        var imgstr ="";
+
+        var linfo = info.split(",");
+        var img = document.getElementById("displayImg");
+                    
+    if(linfo.length > 6){
+   
+        var ansJson = listToJSON(linfo);
+        imgstr = getBaseAvatar(ansJson,rank);
+        img.src = "/gender-loc/"+imgstr;
+        var str="ans"+rank;
+        if(ansJson[str] != undefined){
+            ans = ansJson[str];
+
+        }
+        
+        }else{
+            
+            img.src = "/default.jpg"
+        }
+
+$("#prev").click(function(){
+var prevq = Number(rank)-1;
+var str = "/question/"+String(prevq);
+if(prevq == 13){
+    for(var i = 4; i<info.length ; i+=2){
+        if(info[i] == "ans12" && Number(info[i+1])>3){
+            str = "/question/"+String(12);
+        }
+    }
+}
+if(prevq == 19){
+    for(var i = 4; i<info.length ; i+=2){
+        if(info[i] == "ans18" && info[i+1]!="نعم ، عملي ثابت ومستقر"){
+            str = "/question/"+String(18);
+        }
+    }
+}
+
+
+window.location.href = str;
+});
+</script>
+<!-- Optional JavaScript; choose one of the two! -->
+<!-- <script src="prototype-q1.js"></script> -->
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+-->
+</body>
+</html>
+
+<!-- <select id="dropdown"> drop </select> -->
+<script>
+    var main = document.getElementById("buttonSpace");
+
+    var    count = "<%= info[0].count %>",
+        viewElem = "<%= info[0].viewElem %>".split(","),
+        ansList = [];
+    
+    for(var i = 0; i < viewElem.length; i++){
+        var dropdown = document.createElement('select');
+        dropdown.onfocus = function() { this.size=3; };
+        dropdown.onblur = function() { this.size=1; };
+        dropdown.onchange = function() { this.size=3; this.blur(); };
+        
+        dropdown.id = viewElem[i];
+        main.appendChild(dropdown);
+        var option0 = document.createElement('option');
+            option0.value = viewElem[i];
+            option0.innerHTML = viewElem[i];
+            option0.disabled = true;
+            option0.selected = true;
+            option0.style = "display:none";
+        dropdown.appendChild(option0);
+        ansList.push("");
+    }
+
+    //setting the options for the selects
+        //in case of the 2 dropdown case, question 7
+    if(rank == "7"){
+        var dropdown1 = document.getElementById(viewElem[1]);
+   
+        var opts1 = ["سنة","شهر","أسبوع","يوم"];
+        for(var i = 0; i < opts1.length; i++){
+            var opt = document.createElement('option');
+            opt.innerHTML = opts1[i];
+            dropdown1.appendChild(opt);
+        }
+        var dropdown2 = document.getElementById(viewElem[0]);
+        for(var i = 0; i < 100; i++){
+            var opt = document.createElement('option');
+            opt.innerHTML = i+1;
+            dropdown2.appendChild(opt);
+        }
+    }else if(rank == "9"){
+        
+        for(var j = 0; j < viewElem.length; j++){
+            var dropdown = document.getElementById(viewElem[j]);
+            for(var i = 0; i < 460; i = i+50){
+                var opt = document.createElement('option');
+                opt.innerHTML = i;
+                dropdown.appendChild(opt);
+            }
+        }
+
+    }
+        
+    
+
+    //create dropdown listeners
+    savedAns = [];
+    if(ans != ""){
+        savedAns = ans.split("/");
+        savedAns.pop();
+        for(var i = 0; i < savedAns.length ; i ++){
+            var dropdown = document.getElementById(viewElem[i]);
+            dropdown.value = savedAns[i];
+        }
+    }
+
+    for(var i = 0; i < viewElem.length; i++){
+        var dropdown = document.getElementById(viewElem[i]);
+        (function(index,dropdown){
+                dropdown.addEventListener('change',function (){
+                ansList[index] = dropdown.options[dropdown.selectedIndex].text;})
+        })(i,dropdown);
+    }
+
+            
+
+
+
+
+    $("#next").click(function(){
+
+        var done = true;
+        var str = "";
+        for(var i = 0; i < ansList.length; i ++){
+            if(ansList[i]==""){
+                done = false;
+                break;
+            }
+        }
+
+        if(done || ans != ""){
+            if(done){
+                for(var v =0 ; v < ansList.length ; v++){
+                    str+=String(ansList[v])+"/";
+                }
+                $.post("/submit", {answer : str, quest : rank});
+            }
+            window.location.href = "/question/"+String(Number(rank)+1);
+        }else{
+            alert("please answer");
+        }
+        
+    });
+</script>
+
+
+

@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script src="/assets/jQuery.min.js"></script>
+        <script src="/assets/helperFun.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;900&display=swap" rel="stylesheet">
+        <title>استبيان</title>
+    </head>
+
+    <body>
+        <nav class = "navbar bg-dark navbar-dark">
+            <div class="container">
+                <a class="navbar-brand">استبيان التقييم المبدئي – لومينوس</a>
+            </div>
+        </nav>
+
+        <div id="middle-section" class="row justify-content-center" >
+            <div id="main" class="container cardstyle1 d-flex justify-content-between fix" style="flex-direction: column;">
+                <div class="row justify-content-center" style="height: 25%; align-items: center;  gap: 1px;" >
+                    <div id="addTitle" class="col-12 d-flex justify-content-center" style="height: 36%; text-align: center; align-items: center; font-size: medium;">
+                        
+                    </div>   
+                </div>
+                <div class="row d-flex justify-content-center" style="height: 25%; align-items: center;" >
+                    <div id="5div" class="col-4 d-flex justify-content-center muscle" draggable="true" style="height:50%" >
+                        <img id="5" style="height: 85%;" src="/veryweak.png">
+                    </div>
+                    <div id="4div" class="col-4 d-flex justify-content-center muscle" draggable="true" style="height:50%">
+                        <img id="4" style="height: 85%;" src="/weak.png">
+                    </div>
+                    <div id="3div" class="col-4 d-flex justify-content-center muscle" draggable="true" style="height:50%">
+                        <img id="3" style="height: 85%;" src="/normal.png">
+                    </div>
+                    <div id="2div" class="col-4 d-flex justify-content-center muscle" draggable="true" style="height:50%">
+                        <img id="2" style="height: 85%;" src="/strong.png">
+                    </div>
+                    <div id="1div" class="col-4 d-flex justify-content-center muscle" draggable="true" style="height:50%">
+                        <img id="1" style="height: 85%;" src="/verystrong.png">
+                    </div>
+   
+
+                </div>
+                <div id="pp" class="row justify-content-around" style="height: 30%; align-items: center;" >
+
+                    <div id="before" class="col-6 d-flex justify-content-center align-content-center">
+                        
+                    </div>
+                    <div id="after" class="col-6 d-flex justify-content-center align-content-center ">
+                        
+                    </div>
+                </div>
+
+   
+            
+
+        <script>
+            var rank    = "<%= info[0].quesRank %>";
+                type    = "<%= info[0].ansType %>",
+                title   = "<%= info[0].title %>";
+            
+            var qtitle = document.getElementById("addTitle");
+            qtitle.innerText = title;
+
+            var started = {"1" : false , "2": false, "3" : false,
+                         "4" : false, "5" : false};
+
+            // function touchStart(event)
+            var items = document.querySelectorAll(".muscle");
+            function touchMove(event) {
+                var id = event.target.id;
+                if (event.targetTouches.length == 1) {
+                    if(started[id] == true){
+                        var old = document.getElementById(id+"move");
+                        old.remove();
+                    }
+
+                   
+                    var touch = event.targetTouches[0];
+                    // Place element where the finger is
+                    var clone = event.target.cloneNode(true);
+                    clone.style = "";
+                    main.appendChild(clone);
+                    clone.id = id+"move";
+                    clone.style.height = "60px";
+                    clone.style.position = "absolute";
+                    clone.style.left = (touch.clientX - screen.width/5) + 'px';
+                    clone.style.top = (touch.clientY - screen.height/5) + 'px';
+                    started[id] = true;
+                    var xpos = touch.clientX;
+                    var ypos = touch.clientY;
+                    var loc = document.elementFromPoint(xpos, ypos);
+                 
+                };
+            };
+
+            items.forEach(item =>{
+                item.addEventListener('touchmove', touchMove);
+            });
+
+            var after = "";
+            var before = "";
+
+            function touchEnd(event) {
+                var id = event.target.id;
+                event.preventDefault();
+                event.stopPropagation();
+                var touch = event.changedTouches[0];
+                xpos = touch.pageX - window.pageXOffset;
+                ypos = touch.pageY - window.pageXOffset;
+                // var data = event.target;
+                // event.target.remove;
+                var icon = document.getElementById(id+"move");
+                if(icon){
+                    icon.remove();
+                }  
+                var temp = document.elementFromPoint(xpos, ypos);
+        
+                var rem = document.getElementById(temp.id);
+            
+                var alreadyEmptied = false;
+                if((temp.id == '1set') || (temp.id == '2set') || (temp.id == '3set') || (temp.id == '4set') || (temp.id == '5set') ){
+                        temp.parentNode.removeChild(rem);
+                        alreadyEmptied = true;
+                   
+                       
+                    }
+                var temp = document.elementFromPoint(xpos, ypos);
+                // div.appendChild(data);
+                if((temp.id == "after") || (temp.id == "before"))
+                { 
+                
+                    if((temp.id == 'after') && (after != "") && (!alreadyEmptied)){
+                   
+                        var x = document.getElementById(after);
+                        x.remove();
+                    };
+                    if((temp.id == 'before') && (before != "") && (!alreadyEmptied)){
+                  
+                        var x = document.getElementById(before);
+                        x.remove();
+                    };
+                    
+                    var clone = event.target.cloneNode(true);
+                    clone.id = id+'set';
+                    clone.style.height = "66px";
+                    temp.appendChild(clone);
+                    if(temp.id == 'after'){
+                  
+                        after = clone.id;
+                    }else{
+                        before = clone.id;
+                    }
+                    
+                };
+
+                started[id] = false;
+            };
+
+            items.forEach(item =>{
+                item.addEventListener('touchend', touchEnd);
+            });
+
+
+            var box1 = document.getElementById("before");
+            var box2 = document.getElementById("after");
+
+            box1.addEventListener('dragenter', dragEnter)
+            box1.addEventListener('dragover', dragOver);
+            box1.addEventListener('dragleave', dragLeave);
+            box1.addEventListener('drop', drop);
+            box2.addEventListener('dragenter', dragEnter)
+            box2.addEventListener('dragover', dragOver);
+            box2.addEventListener('dragleave', dragLeave);
+            box2.addEventListener('drop', drop);
+            function dragEnter(e) {
+                e.preventDefault();
+                e.target.classList.add('drag-over');
+            }
+
+            function dragOver(e) {
+                e.preventDefault();
+                e.target.classList.add('drag-over');
+            }
+
+            function dragLeave(e) {
+                e.target.classList.remove('drag-over');
+            }
+
+            function drop(e) {
+                e.target.classList.remove('drag-over');
+                e.target.innerHTML="";
+                // get the draggable element
+                const id = e.dataTransfer.getData('text/plain');
+                const draggable = document.getElementById(id);
+                const clone = draggable.cloneNode(true);
+                clone.style.height ="65px"
+                localans = clone.id;
+                e.target.appendChild(clone);
+            }
+
+
+            var rank    = "<%= info[0].quesRank %>";
+                type    = "<%= info[0].ansType %>",
+                title   = "<%= info[0].title %>";
+            
+            var info = "<%=info[1]%>";
+
+
+
+        </script>
+
+
+
+<%- include('partials/footer.ejs') %>
+
+<script>
+
+
+
+
+$("#prev").click(function(){
+    var prevq = Number(rank)-1;
+    var str = "/question/"+String(prevq);
+    window.location.href = str;
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+
+<script> 
+    // document.getElementById("prev").disabled = true;
+
+    $("#next").click(function(){
+
+        var at = document.getElementById("after");
+        var br = document.getElementById("before");
+
+        if((!at.firstElementChild)||(!br.firstElementChild)){
+            alert("please answer");
+        }else{
+            var afteranswer = at.firstElementChild.id.split("s")[0];
+            var beforeanswer = br.firstElementChild.id.split("s")[0];
+            var strsend = beforeanswer+"/"+afteranswer;
+            $.post("/submit", {answer : strsend, quest : rank});
+            window.location.href = "/question/"+String(Number(rank)+1);
+        }
+        
+        
+    });
+
+    
+</script>
