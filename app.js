@@ -87,27 +87,29 @@ app.get("/question/:number",async function(req,res){
 
         var myJson = {'quesRank' : quesNum};
  
-    
-        var upAns = await answer.findById(req.sessionID).lean();
+        if(quesNum < 1 || quesNum > 47){
+            res.render("./error");
+        }else{
+            var upAns = await answer.findById(req.sessionID).lean();
 
-        question.findOne(myJson,function(err,returnVal){
-            if(err){
-                console.log("uh-oh");
-            }else{
-                var ansEntries = [];
-                if(upAns){
-                    ansEntries = Object.entries(upAns);
-                }
-                var info = [returnVal,ansEntries];
-                
-                var ansType = returnVal.ansType;
-         
-                res.render(ansType,{info: info});
-    
-                
-            }  
-        });
-    
+            question.findOne(myJson,function(err,returnVal){
+                if(err){
+                    console.log("uh-oh");
+                }else{
+                    var ansEntries = [];
+                    if(upAns){
+                        ansEntries = Object.entries(upAns);
+                    }
+                    var info = [returnVal,ansEntries];
+                    
+                    var ansType = returnVal.ansType;
+             
+                    res.render(ansType,{info: info});
+        
+                    
+                }  
+            });
+        }    
 });
 
 
