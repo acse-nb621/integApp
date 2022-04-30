@@ -63,7 +63,7 @@ option {
 
 
 .nav-btn{
-    font-size: medium;
+    font-size: 1.8vh;
     height: fit-content;
     width: fit-content;
     background: #a8a8a8;
@@ -245,7 +245,7 @@ option {
 }
 
 .month-tag {
-    font-size:x-small;
+    font-size: 1vh;
 }
 
 @media (min-width: 1400px) {
