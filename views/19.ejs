@@ -35,6 +35,7 @@
                 <div class="row justify-content-center" style="height: 25%;" >
                     <div class="col"> 
                         <select id="worksel" style="width: 100%; height: 30%; font-size:70%;" size="1">
+                            <option id="def" style="display: none;">الخيارات</option>
                             <optgroup >
                                 <option id="seas">نعم ، إنه موسمي</option>
                                 <option id="var">لا ، إنه ليس موسميً ولكنه غير مستقر</option>
@@ -105,8 +106,11 @@
             };
 
             $("#worksel").change(function(e){
-                localans = $("#worksel option:selected" ).text();
-                updateImage($("#worksel option:selected" ).attr("id"));
+                if($("#worksel option:selected" ).attr("id") != "def"){
+                    localans = $("#worksel option:selected" ).text();
+                    updateImage($("#worksel option:selected" ).attr("id"));
+                }
+
             });
 
         </script>
