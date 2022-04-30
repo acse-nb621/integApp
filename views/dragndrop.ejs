@@ -31,20 +31,20 @@
                     </div>   
                 </div>
                 <div class="row d-flex justify-content-center" style="height: 25%; align-items: center;" >
-                    <div id="5div" class="col-4 d-flex justify-content-center muscle" draggable="true" style="height:50%" >
-                        <img id="5" style="height: 85%;" src="/veryweak.png">
+                    <div id="1div" class="col-4 d-flex justify-content-center muscle" draggable="true" style="height:50%" >
+                        <img id="1" style="height: 85%;" src="/veryweak.png">
                     </div>
-                    <div id="4div" class="col-4 d-flex justify-content-center muscle" draggable="true" style="height:50%">
-                        <img id="4" style="height: 85%;" src="/weak.png">
+                    <div id="2div" class="col-4 d-flex justify-content-center muscle" draggable="true" style="height:50%">
+                        <img id="2" style="height: 85%;" src="/weak.png">
                     </div>
                     <div id="3div" class="col-4 d-flex justify-content-center muscle" draggable="true" style="height:50%">
                         <img id="3" style="height: 85%;" src="/normal.png">
                     </div>
-                    <div id="2div" class="col-4 d-flex justify-content-center muscle" draggable="true" style="height:50%">
-                        <img id="2" style="height: 85%;" src="/strong.png">
+                    <div id="4div" class="col-4 d-flex justify-content-center muscle" draggable="true" style="height:50%">
+                        <img id="4" style="height: 85%;" src="/strong.png">
                     </div>
-                    <div id="1div" class="col-4 d-flex justify-content-center muscle" draggable="true" style="height:50%">
-                        <img id="1" style="height: 85%;" src="/verystrong.png">
+                    <div id="5div" class="col-4 d-flex justify-content-center muscle" draggable="true" style="height:50%">
+                        <img id="5" style="height: 85%;" src="/verystrong.png">
                     </div>
    
 
@@ -201,11 +201,18 @@
                 e.target.classList.remove('drag-over');
             }
 
+
+            var dict = {"verystrong": "5","strong":"4","normal":"3","weak":"2","veryweak":"1"};
             function drop(e) {
+                console.log(e.target)
                 e.target.classList.remove('drag-over');
                 e.target.innerHTML="";
                 // get the draggable element
-                const id = e.dataTransfer.getData('text/plain');
+                const id_ = e.dataTransfer.getData('text/plain');
+                var arr = id_.split("/");
+                var el = arr[3];
+                var str = el.split(".")[0];
+                var id = dict[str];
                 const draggable = document.getElementById(id);
                 const clone = draggable.cloneNode(true);
                 clone.style.height ="65px"
