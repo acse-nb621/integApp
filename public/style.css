@@ -12,10 +12,7 @@
 }
 
 
-#worksel {
-    background: rgb(216, 216, 216);
-    border: 3px solid rgb(159, 159, 159);
-}
+
 
 option {
     border-bottom: 3px solid rgb(159, 159, 159);
@@ -57,10 +54,7 @@ option {
     height: auto;
 }
 
-.genderImg{
-    width: 80%;
-    height: auto;
-}
+
 
 .nav-btn{
     font-size: medium;
@@ -168,8 +162,8 @@ option {
 #wrange::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 50pt;
-    height: 50pt;
+    width: 30pt;
+    height: 30pt;
     background-image: url("/hat.png");
     background-size: contain;
     cursor: pointer;
@@ -249,15 +243,11 @@ option {
 }
 
 .month-select{
-    align-items: center; 
+    font-size: x-small;
     width: 100%;
-    height: 90%;
-    font-size: 4vw;
 }
 
-.month-tag {
-    font-size: 2.1vw;
-}
+
 .long-tag {
     font-size: 3.1vw;
 }
@@ -266,14 +256,14 @@ option {
     font-size: 3vw;
 }
 
-@media (min-width: 1400px) {
-    .month-select {
-        font-size: 1.1vw;
-    }
+.month-tag {
+    font-size:x-small;
+}
 
-    .month-tag {
-        font-size: 1.1vw;
-    }
+@media (min-width: 1400px) {
+
+
+
     .long-tag {
         font-size: 1.2vw;
     }
@@ -288,16 +278,6 @@ option {
 
 
 
-
-select{
-    display: block;
-    margin: 0 auto;
-    min-width: 60%;
-    padding: 0.1rem;
-    font-size: 3vw;
-    text-align: center;
-    border: 0.2rem solid black;
-}
 
 optgroup {
     all: unset;
