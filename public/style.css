@@ -1,12 +1,12 @@
 #main {
-    height: 75%;
-    min-height: 75%;
+    height: 85%;
     width: 70%;
     background-color: rgba(226, 226, 226, 0.801);
     border: 3px solid rgb(208, 208, 208);
     flex-grow: 1;
     overflow: auto;
     flex-direction: column;
+    margin-top: 5vh;
     }
 
 @media (min-width: 1200px){
@@ -537,14 +537,15 @@ form {
 
 
 .navbar {
-    height: 10%;
+    height: 8%;
     margin: 0;
     background-color: white !important;
+
 }
 
 .navbar-brand {
     color: #323330 !important;
-    font-size: medium;
+    font-size: 3vw;
 }
 
 body,html{
@@ -569,10 +570,12 @@ body,html{
 	background-repeat: no-repeat;
 	background-size:contain;
     background-position: bottom;
-    height: 80%;
+    height: 92%;
     width: 100%;
     margin: 0;
     padding: 0;
+    display: flex;
+    align-items: center;
 }
 
 
