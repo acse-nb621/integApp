@@ -110,8 +110,11 @@
             };
 
             $("#worksel").change(function(e){
-                localans = $("#worksel option:selected" ).text();
-                updateImage($("#worksel option:selected" ).attr("id"));
+                if($("#worksel option:selected" ).attr("id") != "def"){
+                    localans = $("#worksel option:selected" ).text();
+                    updateImage($("#worksel option:selected" ).attr("id"));
+                }
+
             });
 
         </script>

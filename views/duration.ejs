@@ -37,7 +37,7 @@
                     <div class="col-6 justify-content-center" style="align-items: center; height: 50%;">
                         <select id="unit" style="align-items: center; font-size: medium;" size="4" >
                             <optgroup>
-                                <!-- <option id="المدة" value="first">المدة</option> -->
+                                <option id="def" disabled>الخيارات</option>
                                 <option value="سنة">سنة</option>
                                 <option value="شهر">شهر</option>
                                 <option value="أسبوع">أسبوع</option>
@@ -48,7 +48,7 @@
                     <div class="col-6 justify-content-center" style="align-items: center; height: 50%;">
                         <select id="dur" style="align-items: center; font-size: medium;" size="4">
                             <optgroup id="nums">
-                                
+                                <option id="def1" disabled>الخيارات</option>
                             </optgroup>
                             
                         </select>
@@ -110,13 +110,19 @@
         };
 
         $("#unit").change(function(e){
-            var dropdown = document.getElementById("unit");
-            ansString[0] = dropdown.options[dropdown.selectedIndex].text
+            if($("#unit option:selected" ).attr("id") != "def"){
+                var dropdown = document.getElementById("unit");
+                ansString[0] = dropdown.options[dropdown.selectedIndex].text;
+            }
+
         });
 
         $("#dur").change(function(e){
-            var dropdown = document.getElementById("dur");
-            ansString[1] = dropdown.options[dropdown.selectedIndex].text
+            if($("#dur option:selected" ).attr("id") != "def1"){
+                var dropdown = document.getElementById("dur");
+                ansString[1] = dropdown.options[dropdown.selectedIndex].text;
+            }
+
         });
 
         $("#next").click(function(e){

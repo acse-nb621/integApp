@@ -37,6 +37,7 @@
                         <select id="nojobsel" style="width: 100%; font-size: medium;" size="1">
                             <option id="def" style="display: none;">الخيارات</option>
                             <optgroup >
+                                <option class="def">الخيارات</option>
                                 <option value="lose" id="lose">سأخسر وظيفتي أو ستنتهي مدة عقدي</option>
                                 <option id="family">أسباب عائلية</option>
                                 <option id="job">وجدت وظيفة أفضل</option>
@@ -134,8 +135,11 @@
             };
 
             $("#nojobsel").change(function(e){
-                localans = $("#nojobsel option:selected" ).text();
-                updateImage($("#nojobsel option:selected" ).attr("id"));
+                if(!($("#nojobsel option:selected" ).hasClass("def"))){
+                    localans = $("#nojobsel option:selected" ).text();
+                    updateImage($("#nojobsel option:selected" ).attr("id"));
+                }
+
             });
 
         </script>
