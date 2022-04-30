@@ -93,12 +93,7 @@ option {
 }
 
 
-#nojobsel {
-    align-items: center; 
-    width: 100%;
-    height: 90%;
-    font-size: 3vw;
-}
+
 
 
 .fix {
@@ -128,19 +123,6 @@ option {
 
 
 
-@media (min-width: 1800px) {
-    #nojobsel {
-        font-size: 1.2vw;
-    }
-
-}
-
-@media (min-width: 1500px) {
-    #nojobsel {
-        font-size: 1.3vw;
-    }
-
-}
 
 
 
