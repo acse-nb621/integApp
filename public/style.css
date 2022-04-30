@@ -4,6 +4,9 @@
     width: 70%;
     background-color: rgba(226, 226, 226, 0.801);
     border: 3px solid rgb(208, 208, 208);
+    flex-grow: 1;
+    overflow: auto;
+    flex-direction: column;
     }
 
 @media (min-width: 1200px){
@@ -12,6 +15,7 @@
         min-height: 75%;
     }
 }
+
 
 
 
