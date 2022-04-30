@@ -78,8 +78,14 @@
                     gender = ansJson["ans2"];
                 }
                 
-
             }
+
+            if(gender == "ذكر" ){
+                $("#displayImg").attr("src","/13/male-oth.png");
+            }else{
+                $("#displayImg").attr("src","/13/female-oth.png");
+            }
+            
             
             if(ans != ""){
                 
