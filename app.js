@@ -40,8 +40,14 @@ app.set('view engine','ejs');
 
 // home page display
 app.get("/",function(req,res){
-    res.redirect('/question/1');
-    // res.render("governate");
+    res.render("./landing");
+
+});
+
+
+app.get("/exit",function(req,res){
+    res.render("./exit");
+
 });
 
 
