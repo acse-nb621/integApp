@@ -129,7 +129,7 @@
             var nexq = Number(rank)+1;
             if( (ansString[0] == " " || ansString[1] == " ") && ans == "" ){
             
-                alert("please answer");
+                alert("الرجاء الإجابة على السؤال");
             }else if( ansString[0] != " " && ansString[1] != ""){
            
                 $.post("/submit", {answer : ansString[0]+"/"+ansString[1], quest : rank});

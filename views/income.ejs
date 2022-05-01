@@ -260,7 +260,7 @@ $("#prev").click(function(){
         console.log(tempans)
 
         if(!answered && ans == ""){
-            alert("please answer");
+            alert("الرجاء الإجابة على السؤال");
         }else{
             if(answered){
                 $.post("/submit", {answer : tempans, quest : rank});

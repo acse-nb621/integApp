@@ -141,7 +141,7 @@ $("#prev").click(function(){
        
         
         if(localans== "" && ans == ""){
-            alert("please answer")
+            alert("الرجاء الإجابة على السؤال")
         }else{
             if(localans != ""){
                 $.post("/submit", {answer : localans, quest : rank});

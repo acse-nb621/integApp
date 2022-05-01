@@ -22,7 +22,7 @@
         sendans = String(date.value);
         if(!done && ans ==""){
          
-            alert("please answer")
+            alert("الرجاء الإجابة على السؤال")
         }else if(done){
             $.post("/submit", {answer : sendans, quest : rank});
             window.location.href = "/question/"+String(Number(rank)+1);

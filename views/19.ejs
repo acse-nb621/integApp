@@ -24,7 +24,7 @@
         </nav>
 
         <div id="middle-section" class="row justify-content-center" >
-            <div id="main" class="container cardstyle1">
+            <div id="main" class="container cardstyle1" >
                 <div class="row justify-content-center" style="height: 50%; align-items: center;" >
                     <div class="col-12 d-flex justify-content-center" style="height: 90%; align-items: center;">
                         <img id="displayImg" src=""  style="height:80%;"  alt="unknown" >
@@ -139,7 +139,7 @@ $("#prev").click(function(){
 
     $("#next").click(function(){
         if(ans == "" && localans == ""){
-            alert("please answer")
+            alert("الرجاء الإجابة على السؤال")
         }else{
             if(localans != ""){
                 $.post("/submit", {answer : localans, quest : rank});

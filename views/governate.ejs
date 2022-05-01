@@ -106,7 +106,7 @@
     $("#next").click(function(e){
         var val = $("#display").text();
         if(val == " "){
-            alert("please answer question");
+            alert("الرجاء الإجابة على السؤال question");
         }else{
             $.post("/submit", {answer : val, quest : "5"});
             window.location.href = "/question/"+String(6);

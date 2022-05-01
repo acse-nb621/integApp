@@ -115,7 +115,7 @@ $("#prev").click(function(){
     $("#next").click(function(){
         
         if(ans == "" && localans == ""){
-            alert("please answer")
+            alert("الرجاء الإجابة على السؤال")
         }else{
             if(localans != ""){
                 $.post("/submit", {answer : localans, quest : rank});     

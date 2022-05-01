@@ -106,7 +106,7 @@ $("#prev").click(function(){
    
         var inp = $("#input").val();
         if(ans == "" && inp == ""){
-            alert("please answer")
+            alert("الرجاء الإجابة على السؤال")
         }else{
             if(inp != ""){
                 $.post("/submit", {answer : inp, quest : rank});

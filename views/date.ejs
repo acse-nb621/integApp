@@ -153,7 +153,7 @@ $("#prev").click(function(){
         //get input
         var inp = $("#otherTxt").val();
         if(localans== "" && ans == "" && inp == ""){
-            alert("please answer")
+            alert("الرجاء الإجابة على السؤال")
         }else{
             if(localans != ""){
                 $.post("/submit", {answer : localans, quest : rank});
