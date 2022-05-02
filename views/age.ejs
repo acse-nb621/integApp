@@ -155,7 +155,7 @@ $("#prev").click(function(){
             if(localans != ""){
                 $.post("/submit", {answer : localans, quest : rank});
             }
-            sleep(2000);
+            sleep(1000);
             window.location.href = "/question/"+String(Number(rank)+1);
             
         }
