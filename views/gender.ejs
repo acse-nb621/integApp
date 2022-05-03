@@ -114,6 +114,11 @@ $("#prev").click(function(){
 
 <script> 
 
+function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+
     $("#next").click(function(){
      
         
@@ -123,7 +128,9 @@ $("#prev").click(function(){
             if(localans != ""){
                 $.post("/submit", {answer : localans, quest : rank});
             }
-            window.location.href = "/question/"+String(Number(rank)+1);
+            sleep(500).then(() => {
+                window.location.href = "/question/"+String(Number(rank)+1); 
+            });
             
         }
 

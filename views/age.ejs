@@ -155,15 +155,16 @@ $("#prev").click(function(){
             if(localans != ""){
                 $.post("/submit", {answer : localans, quest : rank});
             }
-            
-            sleep(10000).then(() => {window.location.href = "/question/"+String(Number(rank)+1); });
-            
+            console.log("hello1");
+       
+                
+                window.location.href = "/question/"+String(Number(rank)+1); 
+          
+      
         }
         
     })
 
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+
     
 </script>
