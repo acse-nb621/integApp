@@ -1,8 +1,8 @@
 #main {
     height: 85%;
     width: 70%;
-    background-color: rgba(226, 226, 226, 0.801);
-    border: 3px solid rgb(208, 208, 208);
+    background-color: rgba(226, 226, 226, 0.84);
+    /* border: 3px solid rgb(208, 208, 208); */
     /* flex-grow: 1;
     overflow: auto; */
     flex-direction: column;
@@ -16,8 +16,17 @@
     }
 }
 
+div {
+    color: #5A5A5A
+}
 
+input {
+    color: #5A5A5A;
+}
 
+select {
+    color: #5A5A5A;
+}
 
 
 option {
@@ -504,7 +513,7 @@ form {
     border-radius: 3%;
     background-color: white;
     position: absolute;
-	border-color: black;
+	/* border-color: black; */
     margin: 2rem;
     padding: 1.6rem;
     width: fit-content;
@@ -518,7 +527,7 @@ form {
 .cardstyle1{
     border-radius: 3%;
     background-color: rgb(255, 252, 252);
-	border: 0.1rem solid rgb(28, 27, 29);
+	/* border: 0.1rem solid rgb(28, 27, 29); */
     margin: 0.3rem;
     padding: 1.6rem;
     width: fit-content;
@@ -546,6 +555,7 @@ form {
 .navbar-brand {
     color: #323330 !important;
     font-size: 2vh;
+    font-weight: 400;
 }
 
 body,html{
