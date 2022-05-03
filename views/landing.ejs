@@ -24,16 +24,21 @@
 
         <div id="middle-section" class="row justify-content-center" >
             <div id="main" class="container cardstyle1">
-                <div class="row justify-content-center" style="height: 80%; width: 100%; align-items: center; margin:0" >
-                    <div class="col-12 d-flex justify-content-center" style="height: 60%; align-items: center;">
-                        <img id="displayImg" src="/landing.png" style="height: auto; width: 100%;"  alt="unknown" >
-                    </div>    
-                    <div class="col-12 d-flex justify-content-center" style="height: 60%; align-items: center;">
-                        <img id="displayImg" src="/ilogo.png" style="height: auto; width: 100%;"  alt="unknown" >
+                <div class="row" style="height: 10%; width: 100%; margin:0" >
+                    <div class="col d-flex float-left" style="height: 100%; justify-content: flex-end;">
+                        <img id="displayImg" src="/ilogo.png" style="height: 100%; width: auto;"  alt="unknown" >
                     </div>    
                 </div>
-
-
+                <div class="row justify-content-center" style="height: 50%; width: 100%; align-items: center; margin:0" >
+                    <div class="col-12 d-flex justify-content-center" style="height: 100%; align-items: center;">
+                        <img id="displayImg" src="/landing.png" style="height: auto; width: 100%;"  alt="unknown" >
+                    </div>    
+                </div>
+                <div class="row justify-content-center" style="height: 30%; width: 100%; align-items: center; margin:0" >
+                    <div class="col-12 d-flex justify-content-center" style="height: 60%; align-items: center; font-weight: bold; font-size: 3vh;">
+                        للبدأ إضغط على التالي
+                    </div>    
+                </div>
    
             
 
@@ -55,9 +60,11 @@ $("#prev").css("display","none");
 
 
 <script> 
-   $("#next").css("position","absolute");
-   $("#next").css("bottom","10px");
-   $("#next").css("left","10px");
+//    $("#next").css("position","absolute");
+    $("#btns").css("flex-direction","column");
+    $("#btns").css("align-items","flex-start");
+    $("#next").css("align-self","end");
+    $("#next").css("margin-top","3.5vh");
 
     $("#next").click(function(){
 

@@ -159,8 +159,8 @@ option {
 #wrange::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 30pt;
-    height: 30pt;
+    width: 25pt;
+    height: 25pt;
     background-image: url("/hat.png");
     background-size: contain;
     cursor: pointer;
@@ -365,22 +365,16 @@ optgroup {
     border: 3px solid rgb(108, 163, 200);
     border-radius: 7px;
     color: #264c6e;
+    padding: 1vh;
 }
 
 
 
 
 body {
-    font-family: 'Noto Kufi Arabic';
-    font-weight: 900;
-  /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(#d55ec7, #dd733a);
-  /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(#d55ec7, #dd733a);
-  /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(#d55ec7, #dd733a);
-  /* For Firefox 3.6 to 15 */
-  background: linear-gradient(#d55ec7, #dd733a);
+    background-image: url("/grad.png");
+    background-repeat: no-repeat;
+	background-size: cover;
 }
 
 #defaultDiv{
@@ -576,7 +570,8 @@ body,html{
 
 #middle-section {
 
-	background-image: url("amman.png");
+	/* background-image: url("/grad.png"),url("amman.png"); */
+    background-image: url("amman.png");
 	background-repeat: no-repeat;
 	background-size:contain;
     background-position: bottom;
