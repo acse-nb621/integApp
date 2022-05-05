@@ -303,7 +303,7 @@ option {
 }
 
 .month-tag {
-    font-size: 1vh;
+    font-size: 1.8vh;
 }
 
 @media (min-width: 1400px) {
