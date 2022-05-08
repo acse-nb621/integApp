@@ -54,6 +54,19 @@ app.get("/exit",function(req,res){
 // app.post("/changeBaseAvatar",function(){
 //     var
 // });
+function isPositiveInteger(str) {
+    if (typeof str !== 'string') {
+      return false;
+    }
+  
+    const num = Number(str);
+  
+    if (Number.isInteger(num) && num > 0) {
+      return true;
+    }
+  
+    return false;
+  } 
 
 
 app.post("/submit", function(req,res){
@@ -86,8 +99,9 @@ app.get("/question/:number",async function(req,res){
     var quesNum = req.params.number.split(":");
 
         var myJson = {'quesRank' : quesNum};
+
  
-        if(quesNum < 1 || quesNum > 47){
+        if((quesNum < 1) || (quesNum > 47) || (!isPositiveInteger(String(quesNum)))){
             res.render("./error");
         }else{
             var upAns = await answer.findById(req.sessionID).lean();
