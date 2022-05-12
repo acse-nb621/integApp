@@ -108,41 +108,49 @@
 
     $("#next").click(function(){
      
-        
-        if(ans == "" && (tempname.value == "" || tempphone.value == ""  )){
+        //check against regex
+     
+        if( !(/^07[0-9]{8}$/.test(tempphone.value))){
+
+            alert("الرجاء إدخال رقم هاتف صحيح ");
             
-            alert("الرجاء الإجابة على السؤال")
         }else{
-            if(tempphone.value != "" || tempnum.value != "" || tempname.value != ""){
+            if(ans == "" && (tempname.value == "" || tempphone.value == ""  )){
+            
+            alert("الرجاء الإجابة على السؤال");
+
+            }else{
+                if(tempphone.value != "" || tempnum.value != "" || tempname.value != ""){
+                    
+                    var ls = ["","",""];
+                    var oldansls = ans.split("/");
+                    if(tempname.value != ""){
+                        ls[0] = tempname.value;
+                    }else{
+                        ls[0] = oldansls[0];
+                    }
+                    if(tempphone.value != ""){
+                        ls[1] = tempphone.value;
+                    }else{
+                        ls[1] = oldansls[1];
+                    }
+                    if(tempnum.value != ""){
+                        ls[2] = tempnum.value;
+                    }else if(oldansls.length == 3){
+                        ls[2] = oldansls[2];
+                    }
+                    var sendans = ls[0]+"/"+ls[1];
+                    if(ls[2] != ""){
+                        sendans += "/"+ls[2];
+                    }
+                    $.post("/submit", {answer : sendans, quest : rank});
+                }
+
+
                 
-                var ls = ["","",""];
-                var oldansls = ans.split("/");
-                if(tempname.value != ""){
-                    ls[0] = tempname.value;
-                }else{
-                    ls[0] = oldansls[0];
-                }
-                if(tempphone.value != ""){
-                    ls[1] = tempphone.value;
-                }else{
-                    ls[1] = oldansls[1];
-                }
-                if(tempnum.value != ""){
-                    ls[2] = tempnum.value;
-                }else if(oldansls.length == 3){
-                    ls[2] = oldansls[2];
-                }
-                var sendans = ls[0]+"/"+ls[1];
-                if(ls[2] != ""){
-                    sendans += "/"+ls[2];
-                }
-                $.post("/submit", {answer : sendans, quest : rank});
+                window.location.href = "/question/"+String(Number(rank)+1);
+                
             }
-
-
-            
-            window.location.href = "/question/"+String(Number(rank)+1);
-            
         }
 
     })
